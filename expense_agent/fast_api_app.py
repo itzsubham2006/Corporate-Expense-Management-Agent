@@ -18,8 +18,8 @@ from fastapi import FastAPI
 from google.adk.cli.fast_api import get_fast_api_app
 from google.cloud import logging as google_cloud_logging
 
-from app.app_utils.telemetry import setup_telemetry
-from app.app_utils.typing import Feedback
+from expense_agent.app_utils.telemetry import setup_telemetry
+from expense_agent.app_utils.typing import Feedback
 
 setup_telemetry()
 try:
