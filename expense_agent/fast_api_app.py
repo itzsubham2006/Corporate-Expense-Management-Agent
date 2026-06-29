@@ -12,28 +12,63 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
-
+import logging
+import base64
+import json
+import uuid
 import google.auth
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field
+from typing import Optional, Any
+from google.genai import types
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
 from google.adk.cli.fast_api import get_fast_api_app
-from google.cloud import logging as google_cloud_logging
-
+from expense_agent.agent import root_agent
 from expense_agent.app_utils.telemetry import setup_telemetry
 from expense_agent.app_utils.typing import Feedback
 
+class PubSubMessage(BaseModel):
+    data: Optional[str] = Field(default=None, description="Base64-encoded message data.")
+    attributes: Optional[dict[str, str]] = Field(default=None, description="Message attributes.")
+    messageId: Optional[str] = Field(default=None, description="Pub/Sub message ID.")
+    publishTime: Optional[str] = Field(default=None, description="Publish timestamp.")
+
+class PubSubPushRequest(BaseModel):
+    message: PubSubMessage
+    subscription: Optional[str] = Field(
+        default=None,
+        description="Full subscription name (e.g. projects/p/subscriptions/s)."
+    )
+
 setup_telemetry()
+
+# Configure standard Python logging for console logs
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    handlers=[logging.StreamHandler()]
+)
+
+class ConsoleStructLogger:
+    def __init__(self, name: str):
+        self.logger = logging.getLogger(name)
+
+    def log_struct(self, data: dict, severity: str = "INFO"):
+        level = getattr(logging, severity.upper(), logging.INFO)
+        self.logger.log(level, f"Struct Log: {data}")
+
+    def info(self, msg: str, *args, **kwargs):
+        self.logger.info(msg, *args, **kwargs)
+
+    def error(self, msg: str, *args, **kwargs):
+        self.logger.error(msg, *args, **kwargs)
+
+logger = ConsoleStructLogger(__name__)
+
 try:
     _, project_id = google.auth.default()
-    logging_client = google_cloud_logging.Client()
-    logger = logging_client.logger(__name__)
-except Exception as e:
-    import logging
-    logging.basicConfig(level=logging.INFO)
-    class LocalLogger:
-        def log_struct(self, data: dict, severity: str = "INFO"):
-            level = getattr(logging, severity.upper(), logging.INFO)
-            logging.log(level, f"Struct Log: {data}")
-    logger = LocalLogger()
+except Exception:
     project_id = None
 
 allow_origins = (
@@ -55,10 +90,63 @@ app: FastAPI = get_fast_api_app(
     artifact_service_uri=artifact_service_uri,
     allow_origins=allow_origins,
     session_service_uri=session_service_uri,
-    otel_to_cloud=(project_id is not None),
+    otel_to_cloud=False,
 )
 app.title = "ambient-expense-agent"
-app.description = "API for interacting with the Agent ambient-expense-agent"
+# Initialize Runner for handling Pub/Sub messages
+session_service = InMemorySessionService()
+runner = Runner(agent=root_agent, session_service=session_service, app_name="expense_agent")
+
+
+@app.post("/pubsub")
+async def handle_pubsub_trigger(request: PubSubPushRequest):
+    subscription = request.subscription or "projects/unknown/subscriptions/default-subscription"
+    # Normalize subscription path to short name
+    short_sub_name = subscription.split("/")[-1]
+
+    if not request.message.data:
+        raise HTTPException(status_code=400, detail="Missing message data")
+
+    try:
+        decoded_bytes = base64.b64decode(request.message.data)
+        decoded_str = decoded_bytes.decode("utf-8")
+    except Exception as e:
+        logger.error(f"Failed to decode message data: {e}")
+        raise HTTPException(status_code=400, detail=f"Invalid base64 encoding: {e}")
+
+    logger.info(f"Received Pub/Sub event for subscription: {short_sub_name} (messageId: {request.message.messageId})")
+
+    user_id = short_sub_name
+    session_id = request.message.messageId or str(uuid.uuid4())
+
+    session = await session_service.create_session(
+        app_name="expense_agent",
+        user_id=user_id,
+        session_id=session_id
+    )
+
+    new_message = types.Content(
+        role="user",
+        parts=[types.Part.from_text(text=decoded_str)]
+    )
+
+    events = []
+    try:
+        async for event in runner.run_async(
+            user_id=user_id,
+            session_id=session.id,
+            new_message=new_message
+        ):
+            events.append(event)
+            if event.content and event.content.parts:
+                for part in event.content.parts:
+                    if part.text:
+                        logger.info(f"[Workflow Output] {part.text}")
+    except Exception as e:
+        logger.error(f"Error during workflow execution: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Workflow run failed: {str(e)}")
+
+    return {"status": "success", "session_id": session.id, "events_count": len(events)}
 
 
 @app.post("/feedback")
@@ -79,4 +167,4 @@ def collect_feedback(feedback: Feedback) -> dict[str, str]:
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
