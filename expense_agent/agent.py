@@ -244,7 +244,11 @@ async def human_review(ctx: Context, node_input: Any):
         )
         return
 
-    user_decision = ctx.resume_inputs["decision"].strip().lower()
+    decision_val = ctx.resume_inputs["decision"]
+    if isinstance(decision_val, dict):
+        user_decision = (decision_val.get("decision") or "").strip().lower()
+    else:
+        user_decision = decision_val.strip().lower()
     
     result_payload = {
         "expense": expense,
