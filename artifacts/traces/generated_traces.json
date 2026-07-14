@@ -41,7 +41,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:41.012358",
+                "event_time": "2026-07-14T22:06:46.741643",
                 "state_delta": {
                   "expense": {
                     "amount": 45.5,
@@ -62,11 +62,11 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:41.013062"
+                "event_time": "2026-07-14T22:06:46.742734"
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:41.013062"
+                "event_time": "2026-07-14T22:06:46.742734"
               }
             ]
           }
@@ -114,7 +114,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:41.016219",
+                "event_time": "2026-07-14T22:06:46.750883",
                 "state_delta": {
                   "expense": {
                     "amount": 250.0,
@@ -127,7 +127,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:41.016743",
+                "event_time": "2026-07-14T22:06:46.752081",
                 "state_delta": {
                   "expense": {
                     "amount": 250.0,
@@ -145,20 +145,20 @@
                 "content": {
                   "parts": [
                     {
-                      "text": "{\n  \"risk_level\": \"LOW\",\n  \"risk_factors\": [\n    \"Missing date information\"\n  ],\n  \"justification\": \"The expense amount is reasonable for a hotel stay related to a professional conference. The only identified risk is the missing date, which makes it difficult to verify if the expense aligns with a scheduled event.\"\n}",
-                      "thought_signature": "EjQKMgERTTIPHsC7bQVImgp-lZR9ydW2A57bMpiwe6xicrb_WfeyFiph-lPAe1H3F_CXzWEY"
+                      "text": "{\"risk_level\": \"LOW\", \"risk_factors\": [\"Missing date of expense\"], \"justification\": \"The expense amount is reasonable for a hotel stay at a professional conference. The only identified risk is the missing date, which makes it difficult to verify if the charge aligns with the conference schedule.\"}",
+                      "thought_signature": "EjQKMgERTTIPcVYWhaiPX2fjplgKyKhZbevX6DGUi8UH-uS5uAn79a9vLTxDcXt_ri9r1DK3"
                     }
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:41.026923",
+                "event_time": "2026-07-14T22:06:46.775335",
                 "state_delta": {
                   "risk_assessment": {
                     "risk_level": "LOW",
                     "risk_factors": [
-                      "Missing date information"
+                      "Missing date of expense"
                     ],
-                    "justification": "The expense amount is reasonable for a hotel stay related to a professional conference. The only identified risk is the missing date, which makes it difficult to verify if the expense aligns with a scheduled event."
+                    "justification": "The expense amount is reasonable for a hotel stay at a professional conference. The only identified risk is the missing date, which makes it difficult to verify if the charge aligns with the conference schedule."
                   }
                 }
               },
@@ -172,7 +172,7 @@
                         "args": {
                           "interruptId": "decision",
                           "payload": null,
-                          "message": "📋 Expense Details:\n  - Submitter: Bob\n  - Amount: $250.00\n  - Category: Travel\n  - Description: Hotel stay for annual developer conference\n\n🤖 LLM Risk Review:\n  - Risk Level: LOW\n  - Risk Factors: Missing date information\n  - Justification: The expense amount is reasonable for a hotel stay related to a professional conference. The only identified risk is the missing date, which makes it difficult to verify if the expense aligns with a scheduled event.\n\nPlease reply with 'approve' or 'reject' to make a decision.",
+                          "message": "📋 Expense Details:\n  - Submitter: Bob\n  - Amount: $250.00\n  - Category: Travel\n  - Description: Hotel stay for annual developer conference\n\n🤖 LLM Risk Review:\n  - Risk Level: LOW\n  - Risk Factors: Missing date of expense\n  - Justification: The expense amount is reasonable for a hotel stay at a professional conference. The only identified risk is the missing date, which makes it difficult to verify if the charge aligns with the conference schedule.\n\nPlease reply with 'approve' or 'reject' to make a decision.",
                           "response_schema": null
                         },
                         "name": "adk_request_input"
@@ -181,7 +181,7 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:50.247653"
+                "event_time": "2026-07-14T22:06:48.341073"
               },
               {
                 "author": "user",
@@ -202,7 +202,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:50.257171"
+                "event_time": "2026-07-14T22:06:48.349983"
               },
               {
                 "author": "root_agent",
@@ -214,11 +214,11 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:50.257171"
+                "event_time": "2026-07-14T22:06:48.349983"
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:50.257171"
+                "event_time": "2026-07-14T22:06:48.349983"
               }
             ]
           }
@@ -266,7 +266,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:50.261180",
+                "event_time": "2026-07-14T22:06:48.355228",
                 "state_delta": {
                   "expense": {
                     "amount": 150.0,
@@ -279,7 +279,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:50.261708",
+                "event_time": "2026-07-14T22:06:48.356398",
                 "state_delta": {
                   "expense": {
                     "amount": 150.0,
@@ -299,20 +299,21 @@
                 "content": {
                   "parts": [
                     {
-                      "text": "{\"risk_level\": \"LOW\", \"risk_factors\": [\"Missing date information\"], \"justification\": \"The expense amount is reasonable for office equipment. The only notable issue is the missing transaction date, which is required for proper auditing and tax compliance.\"}",
-                      "thought_signature": "EjQKMgERTTIPh_plOmQcUohxqZEqyO0iIWw8nw0XiNBdFUSFuje0S5RdDN-VX8nW5duel5yM"
+                      "text": "{\"risk_level\": \"LOW\", \"risk_factors\": [\"Missing date\", \"Direct use of personal/unspecified credit card for company equipment\"], \"justification\": \"The expense amount is reasonable for office equipment. The primary concerns are the missing date and the reference to a redacted credit card, which is standard procedure but should be verified against company expense policy regarding procurement methods.\"}",
+                      "thought_signature": "EjQKMgERTTIPzfbifyzpBAupgw-KppEqp39-q_zRVFAGdZAesJzDA3PfUPIaCp_W2GkhSf85"
                     }
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:50.264632",
+                "event_time": "2026-07-14T22:06:48.360142",
                 "state_delta": {
                   "risk_assessment": {
                     "risk_level": "LOW",
                     "risk_factors": [
-                      "Missing date information"
+                      "Missing date",
+                      "Direct use of personal/unspecified credit card for company equipment"
                     ],
-                    "justification": "The expense amount is reasonable for office equipment. The only notable issue is the missing transaction date, which is required for proper auditing and tax compliance."
+                    "justification": "The expense amount is reasonable for office equipment. The primary concerns are the missing date and the reference to a redacted credit card, which is standard procedure but should be verified against company expense policy regarding procurement methods."
                   }
                 }
               },
@@ -326,7 +327,7 @@
                         "args": {
                           "interruptId": "decision",
                           "payload": null,
-                          "message": "📋 Expense Details:\n  - Submitter: Charlie\n  - Amount: $150.00\n  - Category: Equipment\n  - Description: Replacing office headset. Used credit card [REDACTED-CC] for payment.\n  - 🔒 PII Redacted: Credit Card\n\n🤖 LLM Risk Review:\n  - Risk Level: LOW\n  - Risk Factors: Missing date information\n  - Justification: The expense amount is reasonable for office equipment. The only notable issue is the missing transaction date, which is required for proper auditing and tax compliance.\n\nPlease reply with 'approve' or 'reject' to make a decision.",
+                          "message": "📋 Expense Details:\n  - Submitter: Charlie\n  - Amount: $150.00\n  - Category: Equipment\n  - Description: Replacing office headset. Used credit card [REDACTED-CC] for payment.\n  - 🔒 PII Redacted: Credit Card\n\n🤖 LLM Risk Review:\n  - Risk Level: LOW\n  - Risk Factors: Missing date, Direct use of personal/unspecified credit card for company equipment\n  - Justification: The expense amount is reasonable for office equipment. The primary concerns are the missing date and the reference to a redacted credit card, which is standard procedure but should be verified against company expense policy regarding procurement methods.\n\nPlease reply with 'approve' or 'reject' to make a decision.",
                           "response_schema": null
                         },
                         "name": "adk_request_input"
@@ -335,7 +336,7 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:51.512491"
+                "event_time": "2026-07-14T22:06:49.738311"
               },
               {
                 "author": "user",
@@ -356,7 +357,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:51.522742"
+                "event_time": "2026-07-14T22:06:49.745259"
               },
               {
                 "author": "root_agent",
@@ -368,11 +369,11 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:51.522742"
+                "event_time": "2026-07-14T22:06:49.745259"
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:51.522742"
+                "event_time": "2026-07-14T22:06:49.745259"
               }
             ]
           }
@@ -420,7 +421,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:51.527368",
+                "event_time": "2026-07-14T22:06:49.749908",
                 "state_delta": {
                   "expense": {
                     "amount": 120.0,
@@ -433,7 +434,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:51.527896",
+                "event_time": "2026-07-14T22:06:49.750448",
                 "state_delta": {
                   "expense": {
                     "amount": 120.0,
@@ -465,7 +466,7 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:51.528415"
+                "event_time": "2026-07-14T22:06:49.751620"
               },
               {
                 "author": "user",
@@ -486,7 +487,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:51.531560"
+                "event_time": "2026-07-14T22:06:49.755337"
               },
               {
                 "author": "root_agent",
@@ -498,11 +499,11 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:51.532089"
+                "event_time": "2026-07-14T22:06:49.755855"
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:51.532089"
+                "event_time": "2026-07-14T22:06:49.755855"
               }
             ]
           }
@@ -550,7 +551,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:51.535300",
+                "event_time": "2026-07-14T22:06:49.760277",
                 "state_delta": {
                   "expense": {
                     "amount": 350.0,
@@ -563,7 +564,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:51.535836",
+                "event_time": "2026-07-14T22:06:49.760277",
                 "state_delta": {
                   "expense": {
                     "amount": 350.0,
@@ -583,21 +584,22 @@
                 "content": {
                   "parts": [
                     {
-                      "text": "{\n  \"risk_level\": \"HIGH\",\n  \"risk_factors\": [\n    \"PII Exposure\",\n    \"Security Protocol Violation\"\n  ],\n  \"justification\": \"The inclusion of a Social Security Number (SSN) in an expense report description constitutes a severe violation of data privacy and security policies. Regardless of the expense validity, handling PII in this manner poses a significant compliance and security risk.\"\n}",
-                      "thought_signature": "EjQKMgERTTIPig2hh57a8HDyx7ZDtRFySlVLv3uedLWt8uu7m1Pgk5os1NU8jsS1xEvboBxr"
+                      "text": "{\n  \"risk_level\": \"HIGH\",\n  \"risk_factors\": [\n    \"Exposure of sensitive PII\",\n    \"Unusual inclusion of personal data\",\n    \"Missing date\"\n  ],\n  \"justification\": \"The inclusion of an SSN in an expense description is a significant data security risk and policy violation. Additionally, the lack of a date makes it difficult to verify the legitimacy and timing of the expense.\"\n}",
+                      "thought_signature": "EjQKMgERTTIPBaJnXVc8UjsXulnKbo9pB-SWBybEV80La52csWlzg8ZW9LbaIzZ_KSwox25q"
                     }
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:51.539049",
+                "event_time": "2026-07-14T22:06:49.764104",
                 "state_delta": {
                   "risk_assessment": {
                     "risk_level": "HIGH",
                     "risk_factors": [
-                      "PII Exposure",
-                      "Security Protocol Violation"
+                      "Exposure of sensitive PII",
+                      "Unusual inclusion of personal data",
+                      "Missing date"
                     ],
-                    "justification": "The inclusion of a Social Security Number (SSN) in an expense report description constitutes a severe violation of data privacy and security policies. Regardless of the expense validity, handling PII in this manner poses a significant compliance and security risk."
+                    "justification": "The inclusion of an SSN in an expense description is a significant data security risk and policy violation. Additionally, the lack of a date makes it difficult to verify the legitimacy and timing of the expense."
                   }
                 }
               },
@@ -611,7 +613,7 @@
                         "args": {
                           "interruptId": "decision",
                           "payload": null,
-                          "message": "📋 Expense Details:\n  - Submitter: Dave\n  - Amount: $350.00\n  - Category: Software\n  - Description: License for developer tooling. Submitter SSN: [REDACTED-SSN].\n  - 🔒 PII Redacted: SSN\n\n🤖 LLM Risk Review:\n  - Risk Level: HIGH\n  - Risk Factors: PII Exposure, Security Protocol Violation\n  - Justification: The inclusion of a Social Security Number (SSN) in an expense report description constitutes a severe violation of data privacy and security policies. Regardless of the expense validity, handling PII in this manner poses a significant compliance and security risk.\n\nPlease reply with 'approve' or 'reject' to make a decision.",
+                          "message": "📋 Expense Details:\n  - Submitter: Dave\n  - Amount: $350.00\n  - Category: Software\n  - Description: License for developer tooling. Submitter SSN: [REDACTED-SSN].\n  - 🔒 PII Redacted: SSN\n\n🤖 LLM Risk Review:\n  - Risk Level: HIGH\n  - Risk Factors: Exposure of sensitive PII, Unusual inclusion of personal data, Missing date\n  - Justification: The inclusion of an SSN in an expense description is a significant data security risk and policy violation. Additionally, the lack of a date makes it difficult to verify the legitimacy and timing of the expense.\n\nPlease reply with 'approve' or 'reject' to make a decision.",
                           "response_schema": null
                         },
                         "name": "adk_request_input"
@@ -620,7 +622,7 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:55.585153"
+                "event_time": "2026-07-14T22:06:51.033475"
               },
               {
                 "author": "user",
@@ -641,7 +643,7 @@
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:55.591274"
+                "event_time": "2026-07-14T22:06:51.041824"
               },
               {
                 "author": "root_agent",
@@ -653,11 +655,11 @@
                   ],
                   "role": "model"
                 },
-                "event_time": "2026-07-07T17:32:55.591274"
+                "event_time": "2026-07-14T22:06:51.041824"
               },
               {
                 "author": "root_agent",
-                "event_time": "2026-07-07T17:32:55.591274"
+                "event_time": "2026-07-14T22:06:51.041824"
               }
             ]
           }
